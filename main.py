@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-DATABASE_URL = os.environ.get("DATABASE_URL") or "postgresql://admin:plAA1t13QVCmkRQFr2bGoAbpJNLeKUrQ@dpg-cvqllt49c44c73bgi16g-a.virginia-postgres.render.com/bookstore_db_40sirl"
+DATABASE_URL = os.environ.get("DATABASE_URL") or "postgresql://admin:plAA1t13QVCmkRQFr2bGoAbpJNLeKUrQ@dpg-cvqllt49c44c73bgi16g-a.virginia-postgres.render.com/bookstore_db_40si"
 
 # Database connection
 def get_db_connection():
