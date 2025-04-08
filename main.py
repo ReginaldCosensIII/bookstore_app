@@ -3,7 +3,8 @@ import psycopg2
 import os
 
 app = Flask(__name__)
-DATABASE_URL = os.environ.get('DATABASE_URL')
+
+DATABASE_URL = "postgresql://postgres:Bigpimp@localhost:5433/bookstore_db"
 
 # Database connection
 def get_db_connection():
