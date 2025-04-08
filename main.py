@@ -4,12 +4,12 @@ import os
 
 app = Flask(__name__)
 
-DATABASE_URL = "postgres://postgres:Bigpimp@localhost:5433/bookstore_db"
+DATABASE_URL = os.environ.get("DATABASE_URL") or "postgresql://admin:plAA1t13QVCmkRQFr2bGoAbpJNLeKUrQ@dpg-cvqllt49c44c73bgi16g-a.virginia-postgres.render.com/bookstore_db_40sirl"
 
 # Database connection
 def get_db_connection():
     
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     
     return conn
 
