@@ -4,13 +4,11 @@ import os
 
 app = Flask(__name__)
 
-DATABASE_URL = os.environ.get("DATABASE_URL") or "postgresql://admin:plAA1t13QVCmkRQFr2bGoAbpJNLeKUrQ@dpg-cvqllt49c44c73bgi16g-a.virginia-postgres.render.com/bookstore_db_40si"
-
 # Database connection
 def get_db_connection():
     
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+    return psycopg2.connect(DATABASE_URL)
     return conn
 
 # Route to view books
