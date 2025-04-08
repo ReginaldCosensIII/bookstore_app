@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-DATABASE_URL = "postgresql://postgres:Bigpimp@localhost:5433/bookstore_db"
+DATABASE_URL = "postgres://postgres:Bigpimp@localhost:5433/bookstore_db"
 
 # Database connection
 def get_db_connection():
