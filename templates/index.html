@@ -1,0 +1,70 @@
+<form method="POST" action="/create_order">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td>{{ book[1] }}</td>
+          <td>{{ book[2] }}</td>
+          <td>${{ book[3] }}</td>
+          <td>
+            <input type="number" name="quantity_{{ book[0] }}" min="0" value="0" onchange="updateTotal()">
+          </td>
+          <td>
+            <input type="checkbox" name="selected_books" value="{{ book[0] }}">
+            <input type="hidden" name="price_{{ book[0] }}" value="{{ book[3] }}">
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="mb-3">
+        <label for="customer_id">Customer ID (optional):</label>
+        <input type="number" id="customer_id" name="customer_id" min="1" class="form-control" placeholder="Enter your customer ID">
+      </div>      
+    <!-- 🟢 Add this line -->
+    <p><strong>Total: $<span id="order-total">0.00</span></strong></p>
+  
+    <button type="submit" class="btn btn-primary">Create Order</button>
+  
+    <!-- ✅ JavaScript can now target #order-total -->
+    <script>
+      function updateTotal() {
+        let total = 0;
+        const checkboxes = document.querySelectorAll('input[name="selected_books"]:checked');
+  
+        checkboxes.forEach(checkbox => {
+          const bookId = checkbox.value;
+          const qtyInput = document.querySelector(`input[name="quantity_${bookId}"]`);
+          const priceInput = document.querySelector(`input[name="price_${bookId}"]`);
+  
+          const quantity = parseInt(qtyInput.value) || 0;
+          const price = parseFloat(priceInput.value) || 0;
+  
+          total += quantity * price;
+        });
+  
+        document.getElementById("order-total").innerText = total.toFixed(2);
+      }
+  
+      document.addEventListener("DOMContentLoaded", () => {
+        const checkboxes = document.querySelectorAll('input[name="selected_books"]');
+        const quantityInputs = document.querySelectorAll('input[type="number"]');
+  
+        checkboxes.forEach(cb => cb.addEventListener("change", updateTotal));
+        quantityInputs.forEach(qty => qty.addEventListener("input", updateTotal));
+  
+        updateTotal();
+      });
+    </script>
+  </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
