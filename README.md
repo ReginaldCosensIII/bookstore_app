@@ -26,7 +26,18 @@ A simple Flask web application backed by PostgreSQL for managing a bookstore inv
 
 ## 📁 Project Structure
 
-bookstore_app/ │ ├── app/ │ ├── init.py # App factory function │ ├── routes.py # Application routes using Blueprint │ ├── services/ # Business logic (e.g., order creation, inventory updates) │ │ └── order_service.py │ └── templates/ │ └── index.html # Homepage template │ ├── main.py # Entry point for local dev ├── requirements.txt # Python dependencies ├── .render.yaml # Render deployment config └── README.md
+bookstore_app/
+├── app/
+│   ├── __init__.py       # App factory function
+│   ├── routes.py         # Application routes using Blueprint
+│   ├── services/         # Business logic (e.g., order creation, inventory updates)
+│   │   └── order_service.py
+│   └── templates/        # HTML templates
+│       └── index.html    # Homepage template
+├── main.py               # Entry point for local dev
+├── requirements.txt      # Python dependencies
+├── .render.yaml          # Render deployment config
+└── README.md             # Project overview and setup instructionsd
 
 ---
 
