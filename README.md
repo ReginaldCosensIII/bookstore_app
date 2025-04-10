@@ -25,7 +25,7 @@ A simple Flask web application backed by PostgreSQL for managing a bookstore inv
 ---
 
 ## 📁 Project Structure
-
+```
 bookstore_app/
 ├── app/
 │   ├── __init__.py       # App factory function
@@ -38,7 +38,7 @@ bookstore_app/
 ├── requirements.txt      # Python dependencies
 ├── .render.yaml          # Render deployment config
 └── README.md             # Project overview and setup instructionsd
-
+```
 ---
 
 ## 🔧 Setup & Installation (Local)
@@ -62,9 +62,10 @@ bookstore_app/
 ---
 
 🌐 Deployment
+
 This app is deployed on Render.
 The .render.yaml file handles the configuration:
-
+```
 services:
   - type: web
     name: bookstore-app
@@ -79,14 +80,16 @@ services:
 
 databases:
   - name: bookstore-db
-
+```
 ---
 
 🧠 Author
+
+```
 Reginald Cosens III
 GitHub:  @ReginaldCosensIII
 Email:   ReginaldCosensIII@gmail.com
-
+```
 ---
 
 📌 Future Improvements
@@ -98,5 +101,7 @@ Email:   ReginaldCosensIII@gmail.com
 
 ---
 
-📜 License
+📜 License:
+```
 This project is for educational and demonstration purposes.
+```
