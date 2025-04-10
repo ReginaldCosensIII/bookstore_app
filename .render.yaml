@@ -3,7 +3,7 @@ services:
     name: bookstore-app
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn bookstore_app.main:app"
+    startCommand: "gunicorn main:app"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
