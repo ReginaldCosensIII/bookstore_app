@@ -29,42 +29,59 @@
     <div class="mb-3">
         <label for="customer_id">Customer ID (optional):</label>
         <input type="number" id="customer_id" name="customer_id" min="1" class="form-control" placeholder="Enter your customer ID">
-      </div>      
+      </div>
+    <h3>Order Summary</h3>
+    <p>Please review your order before submitting.</p>  
+    <p><strong>Selected Books:</strong></p>
+    <ul id="selected_books"></ul>
     <!-- 🟢 Add this line -->
     <p><strong>Total: $<span id="order-total">0.00</span></strong></p>
   
     <button type="submit" class="btn btn-primary">Create Order</button>
   
     <!-- ✅ JavaScript can now target #order-total -->
-    <script>
-      function updateTotal() {
-        let total = 0;
-        const checkboxes = document.querySelectorAll('input[name="selected_books"]:checked');
-  
-        checkboxes.forEach(checkbox => {
-          const bookId = checkbox.value;
-          const qtyInput = document.querySelector(`input[name="quantity_${bookId}"]`);
-          const priceInput = document.querySelector(`input[name="price_${bookId}"]`);
-  
-          const quantity = parseInt(qtyInput.value) || 0;
-          const price = parseFloat(priceInput.value) || 0;
-  
-          total += quantity * price;
-        });
-  
-        document.getElementById("order-total").innerText = total.toFixed(2);
+<script>
+  function updateTotal() {
+    let total = 0;
+    const checkboxes = document.querySelectorAll('input[name="selected_books"]:checked');
+    const selectedBooksList = document.getElementById("selected_books");
+
+    selectedBooksList.innerHTML = ""; // Clear the current summary
+
+    checkboxes.forEach(checkbox => {
+      const bookId = checkbox.value;
+      const row = checkbox.closest("tr");
+      const title = row.children[0].innerText;  // Book title from first <td>
+      const qtyInput = document.querySelector(`input[name="quantity_${bookId}"]`);
+      const priceInput = document.querySelector(`input[name="price_${bookId}"]`);
+
+      const quantity = parseInt(qtyInput.value) || 0;
+      const price = parseFloat(priceInput.value) || 0;
+
+      if (quantity > 0) {
+        const itemTotal = quantity * price;
+        total += itemTotal;
+
+        // Add item to summary list
+        const li = document.createElement("li");
+        li.innerText = `${title} — ${quantity} x $${price.toFixed(2)} = $${itemTotal.toFixed(2)}`;
+        selectedBooksList.appendChild(li);
       }
-  
-      document.addEventListener("DOMContentLoaded", () => {
-        const checkboxes = document.querySelectorAll('input[name="selected_books"]');
-        const quantityInputs = document.querySelectorAll('input[type="number"]');
-  
-        checkboxes.forEach(cb => cb.addEventListener("change", updateTotal));
-        quantityInputs.forEach(qty => qty.addEventListener("input", updateTotal));
-  
-        updateTotal();
-      });
-    </script>
+    });
+
+    document.getElementById("order-total").innerText = total.toFixed(2);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkboxes = document.querySelectorAll('input[name="selected_books"]');
+    const quantityInputs = document.querySelectorAll('input[type="number"]');
+
+    checkboxes.forEach(cb => cb.addEventListener("change", updateTotal));
+    quantityInputs.forEach(qty => qty.addEventListener("input", updateTotal));
+
+    updateTotal();
+  });
+</script>
   </form>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
